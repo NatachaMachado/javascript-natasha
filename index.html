@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piedra, Papel o Tijeras</title>
+    <title>Piedra, Papel o Tijeras - PreEntrega2</title>
     <link rel="stylesheet" href="./CSS/styles.css">
 </head>
 <body>
     <div class="game-container">
         <h1>Piedra, Papel o Tijeras</h1>
+        <p>Elige tu opción:</p>
         <div class="choices">
-            <div class="choice" id="piedra">
+            <div class="choice" id="piedra" onclick="game.playerSelect('piedra')">
                 <img src="./IMG/piedra.png" alt="Piedra">
                 <p>Piedra</p>
             </div>
-            <div class="choice" id="papel">
+            <div class="choice" id="papel" onclick="game.playerSelect('papel')">
                 <img src="./IMG/papel.png" alt="Papel">
                 <p>Papel</p>
             </div>
-            <div class="choice" id="tijeras">
+            <div class="choice" id="tijeras" onclick="game.playerSelect('tijeras')">
                 <img src="./IMG/tijeras.png" alt="Tijeras">
                 <p>Tijeras</p>
             </div>
         </div>
         <div class="result">
-            <p id="result-text">¡Haz tu elección!</p>
+            <div id="player-choice" class="choice-image"></div>
+            <div id="computer-choice" class="choice-image"></div>
         </div>
+        <script src="./JS/script.js"></script>
     </div>
-    <script src="./JS/script.js"></script>
 </body>
 </html>
+
