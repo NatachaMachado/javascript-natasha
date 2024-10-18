@@ -53,6 +53,13 @@ const game = {
         computerChoiceDiv.innerHTML = `<img src="${playerChoiceImage[this.computerChoice]}" alt="${this.computerChoice}">`;
     },
 
+    // Método para guardar resultados
+    saveResult: function(result) {
+        let results = JSON.parse(localStorage.getItem('gameResults')) || [];
+        results.push(result);
+        localStorage.setItem('gameResults', JSON.stringify(results));
+    },
+
     // Método para reiniciar el juego
     restartGame: function() {
         const playAgain = confirm('¿Quieres jugar de nuevo?');
@@ -81,9 +88,25 @@ const game = {
         this.randomChoice();
         this.determineResult(playerChoice);
         this.displayChoices(playerChoice);
+
+        // Guardar resultado
+        this.saveResult({
+            player: playerChoice,
+            computer: this.computerChoice,
+            result: this.resultMessage
+        });
+
         alert(`Elegiste ${playerChoice}. La computadora eligió ${this.computerChoice}. ${this.resultMessage}`);
         this.restartGame(); // Llama a restartGame después de mostrar el resultado
     }
 };
 
-// No hay llamada inicial para startGame; el juego se inicia con clics
+// Agregar un evento para mostrar el historial
+document.getElementById('show-history').onclick = function() {
+    const historyDiv = document.getElementById('history');
+    const results = JSON.parse(localStorage.getItem('gameResults')) || [];
+    historyDiv.innerHTML = results.map(result => 
+        `<p>Elegiste: ${result.player}, Computadora: ${result.computer}, Resultado: ${result.result}</p>`
+    ).join('') || '<p>No hay historial de partidas.</p>';
+};
+
