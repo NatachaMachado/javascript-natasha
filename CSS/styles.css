@@ -30,6 +30,11 @@ body {
 .choice img {
     width: 100px;
     height: 100px;
+    transition: transform 0.2s; /* Transición suave */
+}
+
+.choice img:hover {
+    transform: scale(1.1); /* Aumentar imagen al pasar el ratón */
 }
 
 .choice p {
@@ -51,4 +56,5 @@ body {
     margin-top: 20px;
     text-align: left;
 }
+
 

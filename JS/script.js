@@ -6,8 +6,13 @@ const playerChoiceImage = {
     tijeras: './IMG/tijeras.png',
 };
 
-let computerChoice;
-let resultMessage;
+// Cargar opciones desde un JSON local
+fetch('./data/choices.json')
+    .then(response => response.json())
+    .then(data => {
+        console.log('Datos cargados:', data);
+    })
+    .catch(error => console.error('Error al cargar el JSON:', error));
 
 // Objeto para manejar el juego
 const game = {
@@ -67,11 +72,6 @@ const game = {
             this.resetGame();
         } else {
             alert('Gracias por jugar. ¿Quieres volver a jugar más tarde?');
-            if (confirm('¿Quieres jugar de nuevo ahora?')) {
-                this.resetGame();
-            } else {
-                alert('Gracias por jugar. ¡Hasta luego!');
-            }
         }
     },
 
@@ -109,4 +109,11 @@ document.getElementById('show-history').onclick = function() {
         `<p>Elegiste: ${result.player}, Computadora: ${result.computer}, Resultado: ${result.result}</p>`
     ).join('') || '<p>No hay historial de partidas.</p>';
 };
+
+// Agregar evento para limpiar el historial
+document.getElementById('clear-history').onclick = function() {
+    localStorage.removeItem('gameResults');
+    document.getElementById('history').innerHTML = '<p>Historial borrado.</p>';
+};
+
 
